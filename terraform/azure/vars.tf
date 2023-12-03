@@ -1,4 +1,4 @@
 variable "stracctstaticsite" {
     type    = string
-    default = "memorialonga3"
+    default = "memorialonga4"
 }
