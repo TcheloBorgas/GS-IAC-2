@@ -1,5 +1,5 @@
 resource "azurerm_resource_group" "rg-staticsite" {
-  name     = "poneis2"
+  name     = "poneis3"
   location = "eastus"
 }
  
