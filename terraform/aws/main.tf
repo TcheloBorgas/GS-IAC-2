@@ -79,30 +79,13 @@ resource "aws_instance" "net-1" {
   subnet_id                   = aws_subnet.net-1.id
   vpc_security_group_ids      = [aws_security_group.net.id]
   user_data = <<-EOF
-  #!/bin/bash
-
-  echo "Atualizando com os pacotes mais recentes"
-  yum update -y
-
-  echo "Instalando o Apache"
-  yum install -y httpd
-
-  echo "Habilitando o serviço Apache para iniciar após o reinício"
-  systemctl enable httpd
-
-  echo "Instalando a aplicação"
-  cd /tmp
-  git clone https://github.com/TcheloBorgas/gsiac2.git
-  if [ ! -d "/var/www/html" ]; then
-      mkdir /var/www/html
-  fi
-  cp /tmp/gsiac2/app/*.html /var/www/html
-
-  echo "Iniciando o serviço Apache"
-  systemctl start httpd
-
-  echo '<h1>72 pro exame</h1>' | tee /var/www/html/index.html
-EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y httpd
+              systemctl start httpd
+              systemctl enable httpd
+              echo '<h1>72 pro exame</h1>' | tee /var/www/html/index.html
+              EOF
 
 
 
@@ -120,31 +103,13 @@ resource "aws_instance" "net-2" {
   subnet_id                   = aws_subnet.net-1.id
   vpc_security_group_ids      = [aws_security_group.net.id]
   user_data = <<-EOF
-
-  #!/bin/bash
-
-  echo "Atualizando com os pacotes mais recentes"
-  yum update -y
-
-  echo "Instalando o Apache"
-  yum install -y httpd
-
-  echo "Habilitando o serviço Apache para iniciar após o reinício"
-  systemctl enable httpd
-
-  echo "Instalando a aplicação"
-  cd /tmp
-  git clone https://github.com/TcheloBorgas/gsiac2.git
-  if [ ! -d "/var/www/html" ]; then
-    mkdir /var/www/html
-  fi
-  cp /tmp/gsiac2/app/*.html /var/www/html
-
-  echo "Iniciando o serviço Apache"
-  systemctl start httpd
-
-  echo '<h1>72 pro exame2</h1>' | tee /var/www/html/index.html
-  EOF
+              #!/bin/bash
+              yum update -y
+              yum install -y httpd
+              systemctl start httpd
+              systemctl enable httpd
+              echo '<h1>72 pro exame</h1>' | tee /var/www/html/index.html
+              EOF
   tags = {
     Name = "net"
   }
