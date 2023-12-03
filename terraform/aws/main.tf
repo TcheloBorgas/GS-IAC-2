@@ -61,7 +61,7 @@ resource "aws_security_group" "net" {
 }
 
 resource "aws_instance" "net-1" {
-  ami                         = "ami-0230bd60aa48260c6"
+  ami                         = "ami-0c55b159cbfafe1f0"
   instance_type               = "t2.micro"
   availability_zone           = "us-east-1a"
   associate_public_ip_address = true
@@ -77,13 +77,15 @@ resource "aws_instance" "net-1" {
               echo '<h1>72 pro exame</h1>' | tee /var/www/html/index.html
               EOF
 
+
+
   tags = {
     Name = "net"
   }
 }
 
 resource "aws_instance" "net-2" {
-  ami                         = "ami-0230bd60aa48260c6"
+  ami                         = "ami-0c55b159cbfafe1f0"
   instance_type               = "t2.micro"
   availability_zone           = "us-east-1a"
   associate_public_ip_address = true
