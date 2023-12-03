@@ -61,7 +61,7 @@ resource "aws_security_group" "net" {
 }
 
 resource "aws_instance" "net-1" {
-  ami                         = "ami-0c55b159cbfafe1f0"
+  ami                         = "ami-00c39f71452c08778"
   instance_type               = "t2.micro"
   availability_zone           = "us-east-1a"
   associate_public_ip_address = true
@@ -85,7 +85,7 @@ resource "aws_instance" "net-1" {
 }
 
 resource "aws_instance" "net-2" {
-  ami                         = "ami-0c55b159cbfafe1f0"
+  ami                         = "ami-00c39f71452c08778"
   instance_type               = "t2.micro"
   availability_zone           = "us-east-1a"
   associate_public_ip_address = true
