@@ -103,44 +103,42 @@ EOF
 }
 
 resource "aws_instance" "net-2" {
-  ami                         = "ami-00c39f71452c08778"
+  ami                         = "ami-0abcdef1234567890" # Substitua por sua AMI específica
   instance_type               = "t2.micro"
   availability_zone           = "us-east-1a"
   associate_public_ip_address = true
   subnet_id                   = aws_subnet.net-1.id
   vpc_security_group_ids      = [aws_security_group.net.id]
+  user_data = <<-EOF
+    #!/bin/bash
 
-user_data = <<-EOF
-  #!/bin/bash
+    echo "Atualizando com os pacotes mais recentes"
+    yum update -y
 
-  echo "Atualizando com os pacotes mais recentes"
-  yum update -y
+    echo "Instalando o Apache"
+    yum install -y httpd
 
-  echo "Instalando o Apache"
-  yum install -y httpd
+    echo "Habilitando o serviço Apache para iniciar após o reinício"
+    systemctl enable httpd
 
-  echo "Habilitando o serviço Apache para iniciar após o reinício"
-  systemctl enable httpd
+    echo "Instalando a aplicação"
+    cd /tmp
+    git clone https://github.com/TcheloBorgas/gsiac2.git
+    if [ ! -d "/var/www/html" ]; then
+        mkdir /var/www/html
+    fi
+    cp /tmp/gsiac2/app/*.html /var/www/html
 
-  echo "Instalando a aplicação"
-  cd /tmp
-  git clone https://github.com/TcheloBorgas/gsiac2.git
-  if [ ! -d "/var/www/html" ]; then
-      mkdir /var/www/html
-  fi
-  cp /tmp/gsiac2/app/*.html /var/www/html
+    echo "Iniciando o serviço Apache"
+    systemctl start httpd
 
-  echo "Iniciando o serviço Apache"
-  systemctl start httpd
-
-  echo '<h1>72 pro exame2</h1>' | tee /var/www/html/index.html
-EOF
-
-
+    echo '<h1>72 pro exame2</h1>' | tee /var/www/html/index.html
+    EOF
   tags = {
     Name = "net"
   }
 }
+
 
 resource "aws_lb" "lb" {
   name               = "lb-tchelo"
