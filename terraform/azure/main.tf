@@ -22,7 +22,7 @@ resource "azurerm_storage_blob" "index" {
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/html"
-  source                 = "../app/index.html"
+  source                 = "/app/index.html"
 }
 
 resource "azurerm_storage_blob" "error" {
@@ -31,7 +31,7 @@ resource "azurerm_storage_blob" "error" {
   storage_container_name = "$web"
   type                   = "Block"
   content_type           = "text/html"
-  source                 = "../app/error.html"
+  source                 = "/app/error.html"
 }
 
 # ---------------------------------------------
